@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ItemList from '../../component/ItemList.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-// import items from '../../data/tempdata';
 import { getallproducts } from '../../Redux/product/productAction';
 
 const Allproduct = () => {
