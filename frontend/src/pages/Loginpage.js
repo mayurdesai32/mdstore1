@@ -25,7 +25,7 @@ const Loginpage = () => {
       history.push('/');
     }
     // eslint-disable-next-line
-  }, []);
+  }, [submitHandler]);
 
   return (
     <div className='userauth card'>

@@ -7,7 +7,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const cartItem = useSelector((state) => state.cart.cartItem);
   const curruser = useSelector((state) => state.userlogin.user);
-  const totalqty = cartItem.reduce((acc, item) => acc + item.quatity, 0);
+  const totalqty = cartItem.reduce((acc, item) => acc + item.quantity, 0);
   const logout = () => {
     dispatch(logOutUser(curruser._id));
   };

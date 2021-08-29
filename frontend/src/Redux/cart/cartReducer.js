@@ -13,7 +13,7 @@ const cartReducer = (state = InitailState, action) => {
     case ADD_TO_CART:
       // if product exist in cart
       const currItem = action.payload;
-      const qty = action.payload.quatity;
+      const qty = action.payload.quantity;
       const stock = action.payload.stock;
 
       const isItemExist = state.cartItem.find(
@@ -28,8 +28,8 @@ const cartReducer = (state = InitailState, action) => {
             item._id === currItem._id
               ? {
                   ...item,
-                  quatity:
-                    item.quatity + qty <= stock ? item.quatity + qty : stock,
+                  quantity:
+                    item.quantity + qty <= stock ? item.quantity + qty : stock,
                 }
               : item
           ),
@@ -59,7 +59,7 @@ const cartReducer = (state = InitailState, action) => {
           item._id === action.payload.productid
             ? {
                 ...item,
-                quatity: action.payload.qty,
+                quantity: action.payload.qty,
               }
             : item
         ),

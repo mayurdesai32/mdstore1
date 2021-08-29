@@ -2,12 +2,12 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFromCart, changeQty } from '../../Redux/cart/cartAction';
 import CheckOut from '../../component/CheckOut';
-const Cart = () => {
+const Cart = ({ stripeApiKey }) => {
   const { cartItem } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   const Grandtotal = cartItem.reduce(
-    (acc, item) => acc + item.price * item.quatity,
+    (acc, item) => acc + item.price * item.quantity,
     0
   );
 
@@ -23,7 +23,7 @@ const Cart = () => {
           <tr>
             <th>Name</th>
             <th>Price</th>
-            <th>Quantity</th>
+            <th>quantity</th>
             <th>SubTotal</th>
             <th>Delete</th>
           </tr>
@@ -37,9 +37,7 @@ const Cart = () => {
                 <td>{item.price}</td>
                 <td>
                   <select
-                    value={item.quatity}
-                    // value={quatity}
-
+                    value={item.quantity}
                     onChange={(e) => {
                       dispatch(changeQty(item._id, parseInt(e.target.value)));
                     }}
@@ -53,7 +51,7 @@ const Cart = () => {
                     })}
                   </select>
                 </td>
-                <td>{(item.quatity * item.price).toFixed(2)}</td>
+                <td>{(item.quantity * item.price).toFixed(2)}</td>
                 <td>
                   <button
                     onClick={() => {
@@ -79,10 +77,13 @@ const Cart = () => {
       <br />
       <br />
       <center>
-        <h3>Grant Total: {Grandtotal.toFixed(2)}/-</h3>
+        <h3>Grant Total: {Math.ceil(Grandtotal)}/-</h3>
 
         <br />
-        <CheckOut amount={Grandtotal} />
+        <CheckOut
+          amount={Math.ceil(Grandtotal) * 100}
+          stripeApiKey={stripeApiKey}
+        />
       </center>
     </div>
   );

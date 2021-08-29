@@ -6,7 +6,7 @@ import {
   REMOVE_ALL,
 } from './cartConstant';
 
-export const addToCart = (product, quatity) => async (dispatch, getState) => {
+export const addToCart = (product, quantity) => async (dispatch, getState) => {
   const cartItem = {
     name: product.name,
     _id: product._id,
@@ -14,7 +14,7 @@ export const addToCart = (product, quatity) => async (dispatch, getState) => {
     stock: product.stock,
     // _id: product._id,
     // product,
-    quatity,
+    quantity,
   };
   dispatch({ type: ADD_TO_CART, payload: cartItem });
   localStorage.setItem('cartItem', JSON.stringify(getState().cart.cartItem));

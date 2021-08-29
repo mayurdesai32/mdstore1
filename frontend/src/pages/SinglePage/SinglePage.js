@@ -5,7 +5,7 @@ import './SinglePage_Style.scss';
 import { getallproductById } from '../../Redux/product/productAction';
 import { addToCart } from '../../Redux/cart/cartAction';
 const SinglePage = ({ match }) => {
-  const [quatity, setquatity] = useState(1);
+  const [quantity, setquantity] = useState(1);
   const Id = match.params.id;
   const dispatch = useDispatch();
 
@@ -20,7 +20,7 @@ const SinglePage = ({ match }) => {
   }, []);
 
   const addtocart = () => {
-    dispatch(addToCart(product, parseInt(quatity)));
+    dispatch(addToCart(product, parseInt(quantity)));
     // console.log(product);
   };
   const err = error || 'product not found ';
@@ -64,9 +64,9 @@ const SinglePage = ({ match }) => {
 
                   <select
                     className='SingleProduct_qty_opt'
-                    value={quatity}
+                    value={quantity}
                     onChange={(e) => {
-                      setquatity(e.target.value);
+                      setquantity(e.target.value);
                     }}
                   >
                     {[...Array(product.stock).keys()].map((x, i) => {

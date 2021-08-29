@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './App.scss';
 import Homepage from './pages/Homepage';
 import Navbar from './component/Navbar';
@@ -12,6 +14,15 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Allproduct from './pages/Allproduct/Allproduct';
 import ResetPassword from './pages/ResetPassword';
 function App() {
+  const [stripeApiKey, setstripeApiKey] = useState('');
+  const stripeapi = async () => {
+    const response = await axios.get(`order/stripeapi`);
+    console.log(response);
+    setstripeApiKey(response.data.stripeApiKey);
+  };
+  useEffect(() => {
+    stripeapi();
+  }, []);
   return (
     <BrowserRouter>
       <Navbar />
@@ -22,7 +33,9 @@ function App() {
           <Route path='/singlepage/:id' component={SinglePage} />
           <Route exact path='/signinandsingup' component={SignInAndSingUp} />
           <Route exact path='/allproduct' component={Allproduct} />
-          <Route exact path='/cart' component={Cart} />
+          <Route exact path='/cart'>
+            <Cart stripeApiKey={stripeApiKey} />
+          </Route>
           <Route exact path='/register' component={RegisterPage} />
           <Route exact path='/login' component={Loginpage} />
           <Route exact path='/forgotpassword' component={Forgotpassword} />

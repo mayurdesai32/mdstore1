@@ -5,6 +5,7 @@ const user = require('./routes/user');
 const db = require('./db/db');
 const ExpressError = require('./error handler/ExpressError');
 const cookieParser = require('cookie-parser');
+const order = require('./routes/order');
 
 // for database
 db();
@@ -12,6 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use('/product', product);
+app.use('/order', order);
 app.use('/user', user);
 
 // for Error haddler
