@@ -13,6 +13,7 @@ const createproduct = wrapAsync(async (req, res, next) => {
 
 // to read all the product
 const readallproduct = wrapAsync(async (req, res) => {
+  console.log('hello world');
   const resPerPage = 4;
   const productsCount = await Product.countDocuments();
   const apiFeatures = new ApiFeatures(Product.find(), req.query)

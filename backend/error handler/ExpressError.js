@@ -1,8 +1,12 @@
+// const AppError = require('./AppError');
+
 const ExpressError = (err, req, res, next) => {
   if (process.env.NODE_ENV === 'dev') {
     const { status = 500, message = 'Error Occur' } = err;
-    console.log('hello' + err.stack);
-    res.status(status).json({ errmessage: message, errstack: err.stack });
+    console.log('error' + err.stack);
+    res
+      .status(status)
+      .json({ sucess: false, errmessage: message, errstack: err.stack });
   }
   // for production
   else if (process.env.NODE_ENV === 'prod') {
@@ -24,7 +28,7 @@ const ExpressError = (err, req, res, next) => {
       status = 400;
     }
     console.log(err);
-    res.status(status).send(message);
+    res.status(status).json({ sucess: false, message });
   }
 };
 module.exports = ExpressError;
