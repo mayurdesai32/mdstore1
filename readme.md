@@ -56,7 +56,9 @@ MDSTORE is a full-fledged eCommerce website developed using the MERN stack (Mong
 
 ### Env Variable
 
-#### 1. create filename backend.env
+#### Create new folder name env
+
+#### 1.Inside env folder create filename backend.env with following detail
 
 - PORT=
 - DBURI=
@@ -77,7 +79,7 @@ MDSTORE is a full-fledged eCommerce website developed using the MERN stack (Mong
 
 - cookie_EXPIRES_TIME=120000
 
-#### 2. create filename mongodb.env
+#### 2. Inside env folder create filename mongodb.env with following detail
 
 - MONGO_INITDB_ROOT_USERNAME=
 - MONGO_INITDB_ROOT_PASSWORD=
@@ -126,23 +128,23 @@ step2 To install/uninstall dependencies
 
 ### Using docker compose
 
-To start the application
+#### To start the application
 
 - docker compose up
 
-To stop the application
+#### To stop the application
 
 - docker compose down
 
-For list of container
+#### For list of container
 
 - docker container ps
 - docker container ps -a
 
-To check the log of container
+#### To check the log of container
 
 - docker logs \<container-name>
 
-To check the log attach container
+#### To check the log attach container
 
 - docker logs -f \<container-name>
