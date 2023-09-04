@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon -L --inspect=0.0.0.0  server.js"
   },
   "author": "mayur desai",
   "license": "ISC",
@@ -21,5 +22,8 @@
     "stripe": "^8.171.0",
     "uuid": "^8.3.2",
     "validator": "^13.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }

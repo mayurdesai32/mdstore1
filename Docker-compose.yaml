@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    volumes:
+      - data:/data/db
+    env_file:
+      - ${PWD}/env/mongo.env
+
+  backend:
+    container_name: backend
+    build: './backend'
+    restart: unless-stopped
+    ports:
+      - '5000:5000'
+    volumes:
+      - ${PWD}/backend:/app
+      - '/app/node_modules'
+    env_file:
+      - ${PWD}/env/backend.env
+    depends_on:
+      - mongodb
+
+  frontend:
+    container_name: frontend
+    build: './frontend'
+    ports:
+      - '3000:3000'
+    stdin_open: true
+    tty: true
+    volumes:
+      - ${PWD}/frontend:/app
+      - '/app/node_modules'
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_USEPOLLING=true
+    depends_on:
+      - backend
+
+volumes:
+  data:
