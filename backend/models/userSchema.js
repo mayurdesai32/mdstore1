@@ -25,7 +25,14 @@ const userSchema = new Schema({
     // select: false,
   },
 
-  role: { type: String, default: 'user' },
+  role: {
+    type: String,
+    default: 'user',
+    enum: {
+      values: ['user', 'admin'],
+      message: 'please select correct role',
+    },
+  },
 
   resetPasswordToken: { type: String },
   resetPasswordExpire: { type: Date },

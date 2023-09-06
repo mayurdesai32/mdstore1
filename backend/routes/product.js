@@ -6,6 +6,9 @@ const {
   readsingleproduct,
   removeproduct,
   updateproduct,
+  createReview,
+  allReview,
+  deleteReview,
 } = require('../controller/product');
 
 const { authenticateUser, authorizeRoles } = require('../middleware/auth');
@@ -24,11 +27,25 @@ router.get(
 router.post(
   '/create',
   authenticateUser,
-
+  authorizeRoles('admin'),
   createproduct
 );
 // by Id
-router.get('/productbyid/:id', readsingleproduct);
-router.put('/admin/:id', authorizeRoles('admin'), updateproduct);
-router.delete('/admin/:id', authorizeRoles('admin'), removeproduct);
+router.get('/productbyid/:_id', readsingleproduct);
+router.put(
+  '/admin/:_id',
+  authenticateUser,
+  authorizeRoles('admin'),
+  updateproduct
+);
+router.delete(
+  '/admin/:_id',
+  authenticateUser,
+  authorizeRoles('admin'),
+  removeproduct
+);
+router.put('/createreview/:_id', authenticateUser, createReview);
+
+router.get('/allreview/:_id', authenticateUser, allReview);
+router.delete('/deletereview/:_id', authenticateUser, deleteReview);
 module.exports = router;
