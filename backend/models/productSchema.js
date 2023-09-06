@@ -31,9 +31,9 @@ const productSchema = new Schema({
       if (value < 0) {
         //  Errow('value count is -ve');
         throw new AppError('price value is -ve', 404);
-      } else if (value > 5) {
-        //  Errow('value count is -ve');
-        throw new AppError('price value cannot be greater than 5', 404);
+      } else if (value > 500000) {
+        //  Errow('value count more than 5 ');
+        throw new AppError('price value cannot be greater than 500000', 404);
       }
     },
   },

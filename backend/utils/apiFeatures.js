@@ -1,3 +1,4 @@
+// /products?keyword=headphone&stock=gte=50
 class ApiFeatures {
   constructor(query, queryStr) {
     this.query = query;

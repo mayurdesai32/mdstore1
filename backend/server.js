@@ -17,18 +17,14 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-// for database
+// for connecting database
 db();
+
+// for middleware
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-const router = new express.Router();
-const router1 = router.get('/', (req, res) => {
-  res.json('hello world');
-});
-
-app.use('/hello', router1);
 app.use('/product', product);
 app.use('/order', order);
 app.use('/user', user);

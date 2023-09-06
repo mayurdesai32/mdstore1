@@ -9,6 +9,7 @@ const userSchema = new Schema({
   name: {
     type: String,
     required: [true, 'Please enter the name'],
+    minLength: [3, 'Your name should be more than 3 char'],
     maxlength: [30, 'Your name should not be more than 30 char'],
   },
   email: {
@@ -20,10 +21,9 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: [true, 'Please enter the password'],
-    minLength: [6, 'Your name should not be less than 6 char'],
+    minLength: [6, 'Your password should not be less than 6 char'],
     // select: false,
   },
-  cpassword: { type: String, required: true, select: false },
 
   role: { type: String, default: 'user' },
 
@@ -40,7 +40,6 @@ userSchema.pre('save', async function (next) {
     next();
   }
   this.password = await bcrypt.hash(this.password, 12);
-  this.cpassword = await bcrypt.hash(this.cpassword, 12);
 });
 
 // // Compare user password and comfirmed-password
@@ -60,8 +59,8 @@ userSchema.methods.generateAuthToken = async function () {
     {
       id: this._id,
     },
-    process.env.JWT_SECRET
-    // { expiresIn: process.env.JWT_EXPIRES_TIME * 2 * 60 }
+    process.env.JWT_SECRET,
+    { expiresIn: process.env.JWT_EXPIRES_TIME * 24 * 60 * 60 * 1000 }
   );
   this.tokens = this.tokens.concat({ token: token });
   await this.save();
@@ -77,9 +76,10 @@ userSchema.methods.getResetPasswordToken = async function () {
     .createHash('sha256')
     .update(resetToken)
     .digest('hex');
-  this.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
-  await this.save();
-  // console.log(this.resetPassword);
+
+  this.resetPasswordExpire = Date.now() + 60 * 60 * 1000;
+  // await this.save();
+
   return resetToken;
 };
 
